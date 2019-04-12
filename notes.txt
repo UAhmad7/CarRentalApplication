@@ -1,0 +1,10 @@
+sudo nohup mvn spring-boot:run &
+ps -ef
+sudo kill PID
+
+git checkout master
+git merge development
+
+TODO
+- Handle reservation form submit
+- ...
