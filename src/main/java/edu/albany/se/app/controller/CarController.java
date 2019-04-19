@@ -32,6 +32,10 @@ public class CarController
 			jsonObject.put("pricePerDay", car.getPricePerDay());
 			jsonObject.put("imageUrl", car.getImageUrl());
 			jsonObject.put("location", car.getLocation());
+			jsonObject.put("licenseNumber", car.getLicenseNumber());
+			jsonObject.put("licenseState", car.getLicenseState());
+			jsonObject.put("color", car.getColor());
+			jsonObject.put("driveType", car.getDriveType());
 			jsonArray.put(jsonObject);
 		}
 

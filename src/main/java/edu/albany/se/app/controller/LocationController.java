@@ -27,6 +27,11 @@ public class LocationController
 			jsonObject.put("id", location.getId());
 			jsonObject.put("name", location.getName());
 			jsonObject.put("description", location.getDescription());
+			jsonObject.put("city", location.getCity());
+			jsonObject.put("state", location.getState());
+			jsonObject.put("country", location.getCountry());
+			jsonObject.put("address", location.getAddress());
+			jsonObject.put("ZIP_Code", location.getZIP_Code());
 			jsonArray.put(jsonObject);
 		}
 
