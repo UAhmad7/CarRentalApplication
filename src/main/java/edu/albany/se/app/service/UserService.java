@@ -39,4 +39,18 @@ public class UserService
 
         return user;
     }
+
+    public void updateUser(int userId, String firstName, String lastName, String licenseNumber, String email, String password)
+    {
+        UserRepository userRepository = new UserRepository();
+        User user = new User();
+        user.setId(userId);
+        user.setEmail(email);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setLicenseNumber(licenseNumber);
+        user.setPassword(password);
+
+        userRepository.update(user);
+    }
 }

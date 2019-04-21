@@ -14,7 +14,6 @@ public class UserRepository
 {
 	public int userExists(User user)
 	{
-		boolean success = false;
 		EntityManager entityManager = PersistenceUtil.getEntityManager();
 
 		Query query = entityManager.createQuery("FROM User WHERE email=:email AND password=:password")
@@ -63,6 +62,15 @@ public class UserRepository
 		entityManager.getTransaction().commit();
 
 		return success;
+	}
+
+	public void update(User user)
+	{
+		EntityManager entityManager = PersistenceUtil.getEntityManager();
+
+		entityManager.getTransaction().begin();
+		entityManager.merge(user);
+		entityManager.getTransaction().commit();
 	}
 
 	public List<User> getAll()

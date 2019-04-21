@@ -27,4 +27,13 @@ public class CarRepository
 
 		return result.size() > 0 ? result.get(0) : null;
 	}
+
+	public void add(Car car)
+	{
+		EntityManager entityManager = PersistenceUtil.getEntityManager();
+
+		entityManager.getTransaction().begin();
+		entityManager.persist(car);
+		entityManager.getTransaction().commit();
+	}
 }

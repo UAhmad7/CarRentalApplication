@@ -16,6 +16,7 @@ public class Reservation
 	private int endLocationId;
 	private Date startDateTime;
 	private Date endDateTime;
+	private Double total;
 
 	public int getId() {
 		return id;
@@ -71,5 +72,13 @@ public class Reservation
 
 	public void setEndDateTime(Date endDateTime) {
 		this.endDateTime = endDateTime;
+	}
+
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
 	}
 }

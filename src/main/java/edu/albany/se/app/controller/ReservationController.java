@@ -15,7 +15,7 @@ import java.util.List;
 public class ReservationController
 {
 	@PostMapping("/reservation/add")
-	public String makeReservation(@RequestParam String token, @RequestParam int carId, @RequestParam int pickUpLocation, @RequestParam int dropOffLocation, @RequestParam String startDateTime, @RequestParam String endDateTime)
+	public String makeReservation(@RequestParam String token, @RequestParam int carId, @RequestParam int pickUpLocation, @RequestParam int dropOffLocation, @RequestParam String startDateTime, @RequestParam String endDateTime, @RequestParam Double total)
 	{
 		AuthService authService = new AuthService();
 		Integer userId = authService.validateToken(token);
@@ -24,7 +24,7 @@ public class ReservationController
 		if (userId != null)
 		{
 			ReservationService reservationService = new ReservationService();
-			String result = reservationService.makeReservation(userId, carId, pickUpLocation, dropOffLocation, startDateTime, endDateTime);
+			String result = reservationService.makeReservation(userId, carId, pickUpLocation, dropOffLocation, startDateTime, endDateTime, total);
 
 			if (result.equals("success"))
 			{
@@ -94,30 +94,38 @@ public class ReservationController
 		CarService carService = new CarService();
 		LocationService locationService = new LocationService();
 		ReservationService reservationService = new ReservationService();
-		Reservation reservation = reservationService.getByUserId(userId);
+		List<Reservation> reservations = reservationService.getByUserId(userId);
 
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("id", reservation.getId());
-		jsonObject.put("userId", reservation.getUserId());
+		JSONArray jsonArray = new JSONArray();
 
-		User user = userService.getById(reservation.getUserId());
+		for (Reservation reservation : reservations)
+		{
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("id", reservation.getId());
+			jsonObject.put("userId", reservation.getUserId());
 
-		jsonObject.put("email", user.getEmail());
-		jsonObject.put("firstName", user.getFirstName());
-		jsonObject.put("lastName", user.getLastName());
-		jsonObject.put("carId", reservation.getCarId());
+			User user = userService.getById(reservation.getUserId());
 
-		Car car = carService.getById(reservation.getCarId());
-		String carName = car.getMake() + " " + car.getModel() + " " + car.getYear();
+			jsonObject.put("email", user.getEmail());
+			jsonObject.put("firstName", user.getFirstName());
+			jsonObject.put("lastName", user.getLastName());
+			jsonObject.put("carId", reservation.getCarId());
 
-		jsonObject.put("car", carName);
-		jsonObject.put("startLocationId", reservation.getStartLocationId());
-		jsonObject.put("startLocation", locationService.getById(reservation.getStartLocationId()).getName());
-		jsonObject.put("endLocationId", reservation.getEndLocationId());
-		jsonObject.put("endLocation", locationService.getById(reservation.getEndLocationId()).getName());
-		jsonObject.put("startDateTime", reservation.getStartDateTime());
-		jsonObject.put("endDateTime", reservation.getEndDateTime());
+			Car car = carService.getById(reservation.getCarId());
+			String carName = car.getMake() + " " + car.getModel() + " " + car.getYear();
 
-		return jsonObject.toString();
+			jsonObject.put("car", carName);
+			jsonObject.put("startLocationId", reservation.getStartLocationId());
+			jsonObject.put("startLocation", locationService.getById(reservation.getStartLocationId()).getName());
+			jsonObject.put("endLocationId", reservation.getEndLocationId());
+			jsonObject.put("endLocation", locationService.getById(reservation.getEndLocationId()).getName());
+			jsonObject.put("startDateTime", reservation.getStartDateTime());
+			jsonObject.put("endDateTime", reservation.getEndDateTime());
+			jsonObject.put("total", reservation.getTotal());
+
+			jsonArray.put(jsonObject);
+		}
+
+		return jsonArray.toString();
 	}
 }

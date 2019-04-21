@@ -14,8 +14,6 @@ public class AuthService
 {
     public int login(String email, String password)
     {
-    	String message = "success";
-
     	UserRepository userRepository = new UserRepository();
 	    User user = new User();
 	    user.setEmail(email);

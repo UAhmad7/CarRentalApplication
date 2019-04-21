@@ -4,8 +4,6 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import edu.albany.se.app.model.User;
-import edu.albany.se.app.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import edu.albany.se.app.model.Reservation;
@@ -22,7 +20,7 @@ public class ReservationService
         return reservations;
     }
 
-    public String makeReservation(int userId, int carId, int pickUpLocation, int dropOffLocation, String startDateTime, String endDateTime)
+    public String makeReservation(int userId, int carId, int pickUpLocation, int dropOffLocation, String startDateTime, String endDateTime, Double total)
     {
         try
         {
@@ -39,6 +37,7 @@ public class ReservationService
             reservation.setEndLocationId(dropOffLocation);
             reservation.setStartDateTime(new java.sql.Date(startDate.getTime()));
             reservation.setEndDateTime(new java.sql.Date(endDate.getTime()));
+            reservation.setTotal(total);
 
             reservationRepository.addReservation(reservation);
 
@@ -51,11 +50,11 @@ public class ReservationService
         }
     }
 
-    public Reservation getByUserId(int id)
+    public List<Reservation> getByUserId(int id)
     {
         ReservationRepository reservationRepository = new ReservationRepository();
-        Reservation reservation = reservationRepository.getByUserId(id);
+        List<Reservation> reservations = reservationRepository.getByUserId(id);
 
-        return reservation;
+        return reservations;
     }
 }

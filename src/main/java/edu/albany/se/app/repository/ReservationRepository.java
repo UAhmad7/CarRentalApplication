@@ -28,7 +28,7 @@ public class ReservationRepository
 		return query.getResultList();
 	}
 
-	public Reservation getByUserId(int userId)
+	public List<Reservation> getByUserId(int userId)
 	{
 		EntityManager entityManager = PersistenceUtil.getEntityManager();
 
@@ -36,6 +36,7 @@ public class ReservationRepository
 				.setParameter("userId", userId);
 		List<Reservation> result = query.getResultList();
 
-		return result.size() > 0 ? result.get(0) : null;
+		return result;
+//		return result.size() > 0 ? result.get(0) : null;
 	}
 }

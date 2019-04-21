@@ -16,7 +16,7 @@ public class Location
 	private String state;
 	private String country;
 	private String address;
-	private int ZIP_Code;
+	private String zipCode;
 
 	public int getId() {
 		return id;
@@ -74,12 +74,11 @@ public class Location
 		this.address = address;
 	}
 
-	public int getZIP_Code() {
-		return ZIP_Code;
+	public String getZipCode() {
+		return zipCode;
 	}
 
-	public void setZIP_Code(int ZIP_Code) {
-		this.ZIP_Code = ZIP_Code;
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
 	}
-
 }

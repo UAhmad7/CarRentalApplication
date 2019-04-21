@@ -29,4 +29,21 @@ public class CarService
 
         return car;
     }
+
+    public void addCar(String make, String model, String type, int year, int capacity, Double pricePerDay, String imageUrl, String location)
+    {
+        CarRepository carRepository = new CarRepository();
+        Car car = new Car();
+
+        car.setMake(make);
+        car.setModel(model);
+        car.setType(type);
+        car.setYear(year);
+        car.setCapacity(capacity);
+        car.setPricePerDay(pricePerDay);
+        car.setImageUrl(imageUrl);
+        car.setLocation(location);
+
+        carRepository.add(car);
+    }
 }
