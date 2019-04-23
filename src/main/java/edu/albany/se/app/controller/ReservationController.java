@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -43,11 +44,21 @@ public class ReservationController
 		return jsonObject.toString();
 	}
 
-	@PostMapping("/Reservation/delete")
-	public String deleteLocationById(@RequestParam int Id)
+	@PostMapping("/reservationByUserId")
+	public String addReservationById(@RequestParam int userId,@RequestParam int carId, @RequestParam int pickUpLocation, @RequestParam int dropOffLocation, @RequestParam String startDateTime, @RequestParam String endDateTime, @RequestParam Double total)
+	{
+		AuthService authService = new AuthService();
+		JSONObject jsonObject = new JSONObject();
+		ReservationService reservationService = new ReservationService();
+		String result = reservationService.makeReservation(userId, carId, pickUpLocation, dropOffLocation, startDateTime, endDateTime, total);
+		jsonObject.put("message", result);
+		return jsonObject.toString();
+}
+  	@PostMapping("/reservation/delete")
+	public String deleteLocationById(@RequestParam int id)
 	{
 		ReservationService reservationService = new ReservationService();
-		String result=reservationService.deleteReservationById(Id);
+		String result=reservationService.deleteReservationById(id);
 		return result;
 	}
 
@@ -135,5 +146,11 @@ public class ReservationController
 		}
 
 		return jsonArray.toString();
+	}
+	@PostMapping("/reservation/update")
+	public void update(@RequestParam int id, @RequestParam int userId, @RequestParam int carId, @RequestParam int startLocationId, @RequestParam int endLocationId, @RequestParam java.sql.Date startDateTime, @RequestParam Date endDateTime, @RequestParam double total)
+	{
+		ReservationService reservationService = new ReservationService();
+		reservationService.updateReservation(id, userId, carId, startLocationId, endLocationId, startDateTime, endDateTime, total);
 	}
 }

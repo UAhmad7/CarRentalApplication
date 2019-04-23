@@ -77,4 +77,19 @@ public class ReservationService
         reservationRepository.delete(reservation);
         return result;
     }
+    public void updateReservation(int id, int userId, int carId, int startLocationId, int endLocationId, java.sql.Date startDateTime, java.sql.Date endDateTime, Double total)
+    {
+        ReservationRepository reservationRepository = new ReservationRepository();
+        Reservation reservation = new Reservation();
+        reservation.setId(id);
+        reservation.setUserId(userId);
+        reservation.setCarId(carId);
+        reservation.setStartLocationId(startLocationId);
+        reservation.setEndLocationId(endLocationId);
+        reservation.setStartDateTime(startDateTime);
+        reservation.setEndDateTime(endDateTime);
+        reservation.setTotal(total);
+        reservationRepository.update(reservation);
+
+    }
 }

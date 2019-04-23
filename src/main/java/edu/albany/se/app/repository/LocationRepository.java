@@ -1,6 +1,5 @@
 package edu.albany.se.app.repository;
 
-import edu.albany.se.app.model.Car;
 import edu.albany.se.app.model.Location;
 import edu.albany.se.app.util.PersistenceUtil;
 
@@ -17,6 +16,15 @@ public class LocationRepository
 		Query query = entityManager.createQuery("FROM Location");
 		return query.getResultList();
 	}
+
+	public void update(Location location)
+	{
+		EntityManager entityManager = PersistenceUtil.getEntityManager();
+		entityManager.getTransaction().begin();
+		entityManager.merge(location);
+		entityManager.getTransaction().commit();
+	}
+
 
 	public Location getById(int id)
 	{
@@ -36,4 +44,5 @@ public class LocationRepository
 		entityManager.remove(entityManager.contains(location) ? location : entityManager.merge(location));
 		entityManager.getTransaction().commit();
 	}
+
 }

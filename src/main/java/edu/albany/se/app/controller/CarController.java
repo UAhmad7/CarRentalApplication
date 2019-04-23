@@ -33,10 +33,6 @@ public class CarController
 			jsonObject.put("pricePerDay", car.getPricePerDay());
 			jsonObject.put("imageUrl", car.getImageUrl());
 			jsonObject.put("location", car.getLocation());
-			jsonObject.put("licenseNumber", car.getLicenseNumber());
-			jsonObject.put("licenseState", car.getLicenseState());
-			jsonObject.put("color", car.getColor());
-			jsonObject.put("driveType", car.getDriveType());
 			jsonArray.put(jsonObject);
 		}
 
@@ -65,11 +61,18 @@ public class CarController
 
 		return jsonObject.toString();
 	}
-	@PostMapping("/Car/delete")
-	public String deleteLocationById(@RequestParam int Id)
+	@PostMapping("/car/delete")
+	public String deleteLocationById(@RequestParam int id)
 	{
 		CarService carService = new CarService();
-		String result=carService.deleteCarById(Id);
+		String result=carService.deleteCarById(id);
 		return result;
+	}
+
+	@PostMapping("/car/update")
+	public void update(@RequestParam int id, @RequestParam String make, @RequestParam String model, @RequestParam String type, @RequestParam int year, @RequestParam int capacity, @RequestParam Double pricePerDay, @RequestParam String imageURL, @RequestParam String location)
+	{
+		CarService carService = new CarService();
+		carService.updateCar(id, make, model, type, year, capacity, pricePerDay, imageURL, location);
 	}
 }

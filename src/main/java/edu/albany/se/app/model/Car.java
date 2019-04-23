@@ -16,10 +16,7 @@ public class Car
 	private double pricePerDay;
 	private String imageUrl;
 	private String location;
-	private String licenseNumber;
-	private String licenseState;
-	private String color;
-	private String driveType;
+
 
 	public int getId() {
 		return id;
@@ -93,35 +90,5 @@ public class Car
 		this.location = location;
 	}
 
-	public String getLicenseNumber() {
-		return licenseNumber;
-	}
 
-	public void setLicenseNumber(String licenseNumber) {
-		this.licenseNumber = licenseNumber;
-	}
-
-	public String getLicenseState() {
-		return licenseState;
-	}
-
-	public void setLicenseState(String licenseState) {
-		this.licenseState = licenseState;
-	}
-
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
-	}
-
-	public String getDriveType() {
-		return driveType;
-	}
-
-	public void setDriveType(String driveType) {
-		this.driveType = driveType;
-	}
 }

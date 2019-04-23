@@ -26,23 +26,25 @@ public class LocationController
 			jsonObject.put("id", location.getId());
 			jsonObject.put("name", location.getName());
 			jsonObject.put("description", location.getDescription());
-			jsonObject.put("city", location.getCity());
-			jsonObject.put("state", location.getState());
-			jsonObject.put("country", location.getCountry());
-			jsonObject.put("address", location.getAddress());
-			jsonObject.put("ZIP_Code", location.getZipCode());
+
 			jsonArray.put(jsonObject);
 		}
 
 		return jsonArray.toString();
 	}
 
-	@PostMapping("/Location/delete")
-	public String deleteLocationById(@RequestParam int Id)
+	@PostMapping("/location/delete")
+	public String deleteLocationById(@RequestParam int id)
 	{
 		LocationService locationService = new LocationService();
-		String result=locationService.deleteLocationById(Id);
+		String result=locationService.deleteLocationById(id);
         return result;
 	}
 
+	@PostMapping("/location/update")
+	public void update(@RequestParam int id, @RequestParam String name, @RequestParam String description)
+	{
+		LocationService locationService = new LocationService();
+		locationService.updateLocation(id, name, description);
+	}
 }

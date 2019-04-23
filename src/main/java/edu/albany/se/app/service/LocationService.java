@@ -1,7 +1,5 @@
 package edu.albany.se.app.service;
 
-import edu.albany.se.app.model.Car;
-import edu.albany.se.app.repository.CarRepository;
 import org.springframework.stereotype.Service;
 
 import edu.albany.se.app.model.Location;
@@ -26,6 +24,15 @@ public class LocationService
 		Location location = locationRepository.getById(id);
 
 		return location;
+	}
+	public void updateLocation(int id, String name, String description)
+	{
+		LocationRepository locationRepository = new LocationRepository();
+		Location location = new Location();
+		location.setId(id);
+		location.setName(name);
+		location.setDescription(description);
+		locationRepository.update(location);
 	}
 	public String deleteLocationById(int Id)
 	{

@@ -1,6 +1,8 @@
 package edu.albany.se.app.repository;
 
+import edu.albany.se.app.model.Car;
 import edu.albany.se.app.model.Reservation;
+import edu.albany.se.app.model.User;
 import edu.albany.se.app.util.PersistenceUtil;
 
 import javax.persistence.EntityManager;
@@ -14,6 +16,13 @@ public class ReservationRepository
 		EntityManager entityManager = PersistenceUtil.getEntityManager();
 		entityManager.getTransaction().begin();
 		entityManager.persist(reservation);
+		entityManager.getTransaction().commit();
+	}
+	public void update(Reservation reservation)
+	{
+		EntityManager entityManager = PersistenceUtil.getEntityManager();
+		entityManager.getTransaction().begin();
+		entityManager.merge(reservation);
 		entityManager.getTransaction().commit();
 	}
 

@@ -37,10 +37,10 @@ public class AuthController
 	}
 
 	@PostMapping("/deleteUserById")
-	public String delete(@RequestParam int Id)
+	public String delete(@RequestParam int id)
 	{
 		UserService userService=new UserService();
-		String result= userService.deleteUserById(Id);
+		String result= userService.deleteUserById(id);
 		return result;
 	}
 	@PostMapping("/register")
@@ -66,10 +66,10 @@ public class AuthController
 		return jsonObject.toString();
 	}
 	@PostMapping("/user/update")
-	public void update(@RequestParam int Id, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String licenseNumber, @RequestParam String email, @RequestParam String password)
+	public void update(@RequestParam int id, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String licenseNumber, @RequestParam String email, @RequestParam String password)
 	{
 		UserService userService = new UserService();
-		userService.updateUser(Id,firstName,lastName,licenseNumber,email,password);
+		userService.updateUser(id,firstName,lastName,licenseNumber,email,password);
 	}
 
 	@GetMapping("/user/all")

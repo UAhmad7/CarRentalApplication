@@ -1,10 +1,14 @@
 package edu.albany.se.app.service;
 
+import edu.albany.se.app.model.Location;
+import edu.albany.se.app.repository.LocationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.albany.se.app.model.Car;
 import edu.albany.se.app.repository.CarRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,6 +22,21 @@ public class CarService
         return cars;
     }
 
+    public void updateCar(int id,String make,String model,String type,int year,int capacity,Double pricePerDay,String imageURL,String location)
+    {
+        CarRepository carRepository = new CarRepository();
+        Car car = new Car();
+        car.setId(id);
+        car.setMake(make);
+        car.setModel(model);
+        car.setType(type);
+        car.setYear(year);
+        car.setCapacity(capacity);
+        car.setPricePerDay(pricePerDay);
+        car.setImageUrl(imageURL);
+        car.setLocation(location);
+        carRepository.update(car);
+    }
     public String deleteCarById(int Id)
     {
         String result="success";

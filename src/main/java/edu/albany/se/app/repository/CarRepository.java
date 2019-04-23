@@ -17,6 +17,14 @@ public class CarRepository
 		return query.getResultList();
 	}
 
+	public void update(Car car)
+	{
+		EntityManager entityManager = PersistenceUtil.getEntityManager();
+		entityManager.getTransaction().begin();
+		entityManager.merge(car);
+		entityManager.getTransaction().commit();
+	}
+
 	public void delete(Car car)
 	{
 		EntityManager entityManager = PersistenceUtil.getEntityManager();
