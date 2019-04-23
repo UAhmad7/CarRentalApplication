@@ -36,6 +36,13 @@ public class AuthController
 		return jsonObject.toString();
 	}
 
+	@PostMapping("/deleteUserById")
+	public String delete(@RequestParam int Id)
+	{
+		UserService userService=new UserService();
+		String result= userService.deleteUserById(Id);
+		return result;
+	}
 	@PostMapping("/register")
 	public String register(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String country, @RequestParam String licenseNumber, @RequestParam String email, @RequestParam String password)
 	{
@@ -57,6 +64,12 @@ public class AuthController
 		}
 
 		return jsonObject.toString();
+	}
+	@PostMapping("/user/update")
+	public void update(@RequestParam int Id, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String licenseNumber, @RequestParam String email, @RequestParam String password)
+	{
+		UserService userService = new UserService();
+		userService.updateUser(Id,firstName,lastName,licenseNumber,email,password);
 	}
 
 	@GetMapping("/user/all")

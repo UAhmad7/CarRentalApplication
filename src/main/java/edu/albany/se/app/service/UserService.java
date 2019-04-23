@@ -40,6 +40,26 @@ public class UserService
         return user;
     }
 
+    public User editUserById(int Id)
+    {
+        UserRepository userRepository = new UserRepository();
+        User user= userRepository.getById(Id);
+        return user;
+    }
+
+    public String deleteUserById(int Id)
+    {
+        String result= "success";
+        UserRepository userRepository = new UserRepository();
+        User user= userRepository.getById(Id);
+        if(user==null) {
+            result = "Cannot find user";
+            return result;
+        }
+        userRepository.delete(user);
+        return result;
+    }
+
     public void updateUser(int userId, String firstName, String lastName, String licenseNumber, String email, String password)
     {
         UserRepository userRepository = new UserRepository();
@@ -49,6 +69,7 @@ public class UserService
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setLicenseNumber(licenseNumber);
+        user.setEmail(email);
         user.setPassword(password);
 
         userRepository.update(user);

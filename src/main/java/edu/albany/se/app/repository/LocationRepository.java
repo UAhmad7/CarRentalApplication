@@ -28,4 +28,12 @@ public class LocationRepository
 
 		return result.size() > 0 ? result.get(0) : null;
 	}
+	public void delete(Location location)
+	{
+		EntityManager entityManager = PersistenceUtil.getEntityManager();
+
+		entityManager.getTransaction().begin();
+		entityManager.remove(entityManager.contains(location) ? location : entityManager.merge(location));
+		entityManager.getTransaction().commit();
+	}
 }

@@ -13,4 +13,13 @@ import edu.albany.se.app.repository.CountryRepository;
 public class CountryService
 {
     private CountryRepository countryRepository;
+
+    public void updateCountry(int userId, String name)
+    {
+        CountryRepository countryRepository = new CountryRepository();
+        Country country = new Country();
+        country.setId(userId);
+        country.setName(name);
+        countryRepository.update(country);
+    }
 }

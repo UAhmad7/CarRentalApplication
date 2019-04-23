@@ -27,4 +27,16 @@ public class LocationService
 
 		return location;
 	}
+	public String deleteLocationById(int Id)
+	{
+		String result="success";
+		LocationRepository locationRepository = new LocationRepository();
+		Location location = locationRepository.getById(Id);
+        if(location==null)
+		{
+			return "Cannot find location";
+		}
+		locationRepository.delete(location);
+        return result;
+	}
 }

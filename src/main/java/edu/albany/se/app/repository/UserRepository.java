@@ -28,6 +28,14 @@ public class UserRepository
 
 		return 0;
 	}
+	public void delete(User user)
+	{
+		EntityManager entityManager = PersistenceUtil.getEntityManager();
+
+		entityManager.getTransaction().begin();
+		entityManager.remove(entityManager.contains(user) ? user : entityManager.merge(user));
+		entityManager.getTransaction().commit();
+	}
 
 	public boolean create(User user)
 	{
@@ -66,8 +74,10 @@ public class UserRepository
 
 	public void update(User user)
 	{
+		User u=getById(user.getId());
+		int c=u.getCountryId();
+		user.setCountryId(c);
 		EntityManager entityManager = PersistenceUtil.getEntityManager();
-
 		entityManager.getTransaction().begin();
 		entityManager.merge(user);
 		entityManager.getTransaction().commit();

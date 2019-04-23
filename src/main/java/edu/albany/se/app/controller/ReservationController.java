@@ -43,6 +43,14 @@ public class ReservationController
 		return jsonObject.toString();
 	}
 
+	@PostMapping("/Reservation/delete")
+	public String deleteLocationById(@RequestParam int Id)
+	{
+		ReservationService reservationService = new ReservationService();
+		String result=reservationService.deleteReservationById(Id);
+		return result;
+	}
+
 	@GetMapping("/reservation/all")
 	public String allReservations()
 	{

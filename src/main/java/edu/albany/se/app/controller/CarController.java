@@ -65,4 +65,11 @@ public class CarController
 
 		return jsonObject.toString();
 	}
+	@PostMapping("/Car/delete")
+	public String deleteLocationById(@RequestParam int Id)
+	{
+		CarService carService = new CarService();
+		String result=carService.deleteCarById(Id);
+		return result;
+	}
 }

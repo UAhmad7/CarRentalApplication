@@ -1,7 +1,6 @@
 package edu.albany.se.app.controller;
 
 import edu.albany.se.app.model.Location;
-import edu.albany.se.app.service.AuthService;
 import edu.albany.se.app.service.LocationService;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -37,4 +36,13 @@ public class LocationController
 
 		return jsonArray.toString();
 	}
+
+	@PostMapping("/Location/delete")
+	public String deleteLocationById(@RequestParam int Id)
+	{
+		LocationService locationService = new LocationService();
+		String result=locationService.deleteLocationById(Id);
+        return result;
+	}
+
 }

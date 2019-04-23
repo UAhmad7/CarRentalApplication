@@ -50,11 +50,31 @@ public class ReservationService
         }
     }
 
+    public Reservation getById(int id)
+    {
+        ReservationRepository reservationRepository = new ReservationRepository();
+        Reservation location = reservationRepository.getById(id);
+
+        return location;
+    }
     public List<Reservation> getByUserId(int id)
     {
         ReservationRepository reservationRepository = new ReservationRepository();
         List<Reservation> reservations = reservationRepository.getByUserId(id);
 
         return reservations;
+    }
+
+    public String deleteReservationById(int Id)
+    {
+        String result="success";
+        ReservationRepository reservationRepository = new ReservationRepository();
+        Reservation reservation = reservationRepository.getById(Id);
+        if(reservation==null)
+        {
+            return "Cannot find reservation";
+        }
+        reservationRepository.delete(reservation);
+        return result;
     }
 }
